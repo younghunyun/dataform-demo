@@ -1,4 +1,7 @@
-config { type: "assertion" }
+config {
+    type: "assertion",
+    schema: "dataform_imdb_assertion"
+}
 
 SELECT
     *
