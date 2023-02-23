@@ -50,6 +50,5 @@ left outer join
   ${ ref('title_ratings')} as tr
   on tr.tconst = tb.tconst
 where 
-  tb.title_type = "movie"
-  and tr.average_rating is not null
+  tr.average_rating is not null
 
