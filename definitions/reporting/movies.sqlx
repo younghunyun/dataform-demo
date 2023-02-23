@@ -1,11 +1,15 @@
 config { 
   type: 'table',
   tags: ["daily"],
-  schema: "dataform_imdb_reporting"
+  schema: "dataform_imdb_reporting",
+  assertions: {
+    uniqueKey: ["id", "title"],
+    rowConditions: ["rating >= 0"]
+  }
 }
 
 js {
-  var currentDateTime2 = new Date().toISOString();
+  var currentDateTime = new Date().toISOString();
 }
 
 select 
@@ -37,10 +41,11 @@ select
   -- 자바스크립트 함수 적용 케이스
   ${convert_rating_to_stars.convertRatingToStars("tr.average_rating")} as rating_stars,
   -- 자바스크립트 변수 적용 케이스
-  "${get_current_datetime.currentDateTime}" as ingestion_datetime,
-  "${currentDateTime2}" as ingestion_datetime_2
+  "${get_random_string.randomString}" as ingestion_id,
+  -- 자바스크립트 변수 적용 케이스
+  "${currentDateTime}" as ingestion_datetime
 from
-  ${ ref('title_basics' )} as tb
+  ${ ref('title_basics_movie' )} as tb
 left outer join 
   ${ ref('title_ratings')} as tr
   on tr.tconst = tb.tconst

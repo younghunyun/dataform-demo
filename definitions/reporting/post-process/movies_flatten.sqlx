@@ -1,0 +1,21 @@
+config { 
+  type: 'table',
+  tags: ["daily"],
+  schema: "dataform_imdb_reporting"
+}
+
+select 
+  id
+  , title
+  , release_year
+  , directors.primary_name as director
+  , actors.primary_name as actor
+  , votes
+  , rating_stars
+  , ingestion_datetime
+from
+  ${ ref('movies')}
+  , UNNEST(directors) AS directors
+  , UNNEST(actors) AS actors
+where 
+  release_year is not null
