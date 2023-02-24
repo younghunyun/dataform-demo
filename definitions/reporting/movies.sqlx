@@ -41,7 +41,7 @@ select
   -- 자바스크립트 함수 적용 케이스
   ${convert_rating_to_stars.convertRatingToStars("tr.average_rating")} as rating_stars,
   -- 자바스크립트 변수 적용 케이스
-  "${get_random_string.randomString}" as ingestion_id,
+  "${get_random_string.uuid}" as ingestion_id,
   -- 자바스크립트 변수 적용 케이스
   "${currentDateTime}" as ingestion_datetime
 from
