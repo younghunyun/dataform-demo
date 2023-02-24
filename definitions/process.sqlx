@@ -14,6 +14,7 @@ select
   , industry_item
   , SUM(call_cnt) as calls
   , "${currentDateTime}" as query_datetime
+  
 from
   ${ ref('call_delivery') }
 where
