@@ -1,0 +1,1 @@
+var currentDateTime = new Date().toISOString();
